@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS, cross_origin
-from pprint import pprint
+# from pprint import pprint
 import googleapiclient.discovery
 import configuration
 import os
@@ -25,14 +25,13 @@ def start_google_server():
 	compute = googleapiclient.discovery.build('compute', 'v1')
 
 	# Start the instance
-	request = compute.instances().start(project=configuration.PROJECT_ID, zone=configuration.ZONE, instance=configuration.INSTANCE_NAME)
-	response = request.execute()
+	start_request = compute.instances().start(project=configuration.PROJECT_ID, zone=configuration.ZONE, instance=configuration.INSTANCE_NAME)
+	response = start_request.execute()
 
-	pprint(response)
+	# pprint(response)
 
-	externalip = retrieve_ip(compute, configuration.PROJECT_ID, configuration.ZONE)
-	print(externalip)
-	return externalip
+	external_ip = retrieve_ip(compute, configuration.PROJECT_ID, configuration.ZONE)
+	return external_ip
 
 
 ##
@@ -54,14 +53,13 @@ def init_server():
 
 	inputted_password = request.form['password']
 
-	message = '[Server] Password Incorrect'
-	ip_address = 'Password incorrect'
+	message = 'Password Incorrect'
 
 	if inputted_password == configuration.SERVER_PASSWORD:
 		ip_address = start_google_server()
-		message = '[Server] Successfully started server with IP: ' + ip_address
+		message = 'Successfully started server with IP: ' + ip_address
 
-	return
+	return render_template('index.html', ipMessage=message)
 
 
 app.run()
