@@ -9,6 +9,17 @@ input {
 	font-family: 'Roboto', sans-serif;
 }
 
+#imagecontainer {
+	display: grid;
+	height: 100%;
+}
+
+#centerfit {
+	max-width: 100%;
+	max-height: 100vh;
+	margin: auto;
+}
+
 #centercontainer {
     position: absolute;
     top: 40%;
