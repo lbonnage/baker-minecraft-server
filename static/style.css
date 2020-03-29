@@ -9,6 +9,15 @@ input {
 	font-family: 'Roboto', sans-serif;
 }
 
+#centercontainer {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-60%);
+    -webkit-transform: translateX(-50%) translateY(-60%);
+    transform: translateX(-50%) translateY(-60%);
+}
+
 #credits {
 	text-align: left;
 	position: absolute;
