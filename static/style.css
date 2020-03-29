@@ -2,6 +2,11 @@ body {
 	background: #FFFFFF;
 	text-align: center;
 	margin: auto;
+	font-family: 'Roboto', sans-serif;
+}
+
+input {
+	font-family: 'Roboto', sans-serif;
 }
 
 #credits {
