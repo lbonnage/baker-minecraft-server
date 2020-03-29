@@ -1,7 +1,6 @@
 body {
     background: rgba(0, 0, 0, .1) url("/static/wood.png");
     text-align: center;
-	margin: auto;
 	font-family: 'Roboto', sans-serif;
 }
 
@@ -17,7 +16,6 @@ input {
 #centerfit {
 	max-width: 100%;
 	max-height: 100vh;
-	margin: auto;
 }
 
 #centercontainer {
