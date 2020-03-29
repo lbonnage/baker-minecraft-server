@@ -59,6 +59,9 @@ def init_server():
 		ip_address = start_google_server()
 		message = 'Successfully started server with IP: ' + ip_address
 
+	elif inputted_password in configuration.BAKER_TROPES:
+		message = 'Password Incorrect.  Nice Baker reference though!'
+
 	return render_template('index.html', ipMessage=message)
 
 
