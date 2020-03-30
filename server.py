@@ -9,15 +9,21 @@ app = Flask(__name__)
 CORS(app)
 
 
-def retrieve_ip(compute, project, zone):
-	instances = compute.instances().list(project=project, zone=zone).execute()['items']
+##
+# Retrieves the IP address for the started server
+##
+def retrieve_ip(compute, requested_server):
+	instances = compute.instances().list(project=configuration.PROJECT_ID, zone=configuration.ZONE).execute()['items']
 	for instance in instances:
 		# Search for the desired server instance
-		if instance['name'] == 'vanilla-mc-server':
+		if instance['name'] == requested_server:
 			return instance['networkInterfaces'][0]['accessConfigs'][0]['natIP']
 
 
-def start_google_server():
+##
+# Initializes the desired server
+##
+def start_server(requested_server):
 
 	# Set the authentication credential environment variable to the path to our key file
 	os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = configuration.KEY_FILE
@@ -25,12 +31,12 @@ def start_google_server():
 	compute = googleapiclient.discovery.build('compute', 'v1')
 
 	# Start the instance
-	start_request = compute.instances().start(project=configuration.PROJECT_ID, zone=configuration.ZONE, instance=configuration.INSTANCE_NAME)
+	start_request = compute.instances().start(project=configuration.PROJECT_ID, zone=configuration.ZONE, instance=requested_server)
 	response = start_request.execute()
 
 	pprint(response)
 
-	external_ip = retrieve_ip(compute, configuration.PROJECT_ID, configuration.ZONE)
+	external_ip = retrieve_ip(compute, requested_server)
 	return external_ip
 
 
@@ -52,15 +58,17 @@ def load_index():
 def init_server():
 
 	inputted_password = request.form['password']
+	requested_server = request.form['server']
 
-	message = 'Password Incorrect'
+	message = 'Password incorrect.'
 
-	if inputted_password == configuration.SERVER_PASSWORD:
-		ip_address = start_google_server()
-		message = 'Successfully started server with IP: ' + ip_address
-
+	if requested_server == '':
+		message = 'Please select a server from the dropdown list.'
+	elif inputted_password == configuration.PASSWORD:
+		ip_address = start_server(requested_server)
+		message = 'Successfully started server \"' + requested_server + '\" with IP: ' + ip_address
 	elif inputted_password in configuration.BAKER_TROPES:
-		message = 'Password Incorrect.  Nice Baker reference though!'
+		message = 'Password incorrect.  Nice Baker reference though!'
 
 	return render_template('index.html', ipMessage=message)
 

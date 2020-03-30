@@ -1,5 +1,5 @@
 body {
-    background: rgba(0, 0, 0, .1) url("/static/wood.png");
+    background: rgba(0, 0, 0, .1) url("/static/img/wood.png");
     text-align: center;
 	font-family: 'Roboto', sans-serif;
 }
@@ -27,8 +27,22 @@ input {
     transform: translateX(-50%) translateY(-60%);
 }
 
+#servertext {
+	position: absolute;
+	left: 50%;
+	-moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+	text-align: left;
+	/*border: thin solid;*/
+	padding: 2px;
+	width: 90%;
+	margin-bottom: 60px;
+}
+
 #credits {
 	text-align: left;
-	position: absolute;
+	position: fixed;
+	left: 0;
 	bottom: 0;
 }

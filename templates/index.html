@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    	<script src="/static/scripts/dropdown-script.js"></script>
 		<link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
@@ -12,22 +14,30 @@
 		<meta name="theme-color" content="#ffffff">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     	<meta charset="utf-8">
-		<link type="text/css" rel="stylesheet" href="/static/style.css">
+		<link type="text/css" rel="stylesheet" href="/static/css/style.css">
   		<title>Baker Minecraft Server</title>
     </head>
     <body>
         <div id="centercontainer">
 			<div id="imagecontainer">
-				<img id="centerfit"	 src="/static/Baker-Minecraft.png" alt="Baker Minecraft">
+				<img id="centerfit" src="/static/img/baker-minecraft.png" alt="Baker Minecraft">
 			</div><br>
 			Start the server by inputting the password in the box below and pressing submit!  IP Address will then be provided.<br>
 			Server will automatically shut down after 15 minutes without any players online.<br>
 			<a href="https://docs.google.com/document/d/1_FQOq_T1ryXIDVjiGYq_63Avd_S3g1qk7L-D64nZu14/edit?usp=sharing">Rules and Instructions</a><br><br>
             <form action="{{ url_for('init_server') }}", method="POST">
+				<select name="server" type="text" id="serverdropdown">
+					<option value="">-select server-</option>
+					<option value="vanilla-mc-server">Vanilla</option>
+					<option value="ricebuild-mc-server">Rice University Build</option>
+				</select>
                 <input type="password" name="password" placeholder="Password">
                 <input type="submit" value="Start Server">
             </form>
-			<small><em>(Press 'Start Server' only once, it takes approximately 10 seconds to load)</em></small>
+			<small><em>(Press 'Start Server' only once, it takes approximately 10 seconds to load)</em></small><br><br>
+			<div id="servertext">
+				<div style='text-align: center'>Select a server in the dropdown list to see details here.</div>
+			</div>
             <h2>{{ ipMessage }}</h2>
         </div>
 		<div id="credits">
