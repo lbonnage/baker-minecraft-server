@@ -1,5 +1,8 @@
 # Never commit the configuration file
 configuration.py
+# Never commit the service account information
+BakerMinecraft-47457f3f7519.json
+*.json # Ignore all json files just in case
 
 # Ignore the Jetbrains stuff
 .idea

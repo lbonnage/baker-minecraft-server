@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS, cross_origin
-# from pprint import pprint
+from pprint import pprint
 import googleapiclient.discovery
 import configuration
 import os
@@ -13,7 +13,7 @@ def retrieve_ip(compute, project, zone):
 	instances = compute.instances().list(project=project, zone=zone).execute()['items']
 	for instance in instances:
 		# Search for the desired server instance
-		if instance['name'] == 'mc-server':
+		if instance['name'] == 'vanilla-mc-server':
 			return instance['networkInterfaces'][0]['accessConfigs'][0]['natIP']
 
 
@@ -28,7 +28,7 @@ def start_google_server():
 	start_request = compute.instances().start(project=configuration.PROJECT_ID, zone=configuration.ZONE, instance=configuration.INSTANCE_NAME)
 	response = start_request.execute()
 
-	# pprint(response)
+	pprint(response)
 
 	external_ip = retrieve_ip(compute, configuration.PROJECT_ID, configuration.ZONE)
 	return external_ip
