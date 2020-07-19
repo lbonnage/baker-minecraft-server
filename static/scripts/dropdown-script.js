@@ -8,8 +8,8 @@ $(function () {
             	$("#server-text").html(
             		function() {
             		    var name = "Vanilla Minecraft";
-                        var minecraft_version = "1.15.2";
-            		    var description = "Vanilla Minecraft survival.";
+                        var minecraft_version = "1.16.1";
+            		    var description = "Vanilla Minecraft survival.  (Announcement 7/19/2020: Server was updated from Minecraft Version 1.15.2 to Version 1.16.1.";
                         var requirements = "Vanilla Minecraft";
             			return "<strong>Name:</strong> " + name + "<br>" +
                             "<strong>Description:</strong> " + description + "<br>" +
